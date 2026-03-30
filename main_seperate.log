@@ -1,0 +1,5 @@
+Using device: cuda:0
+✅ WHU 3-way split loaded.
+✅ LEVIR split loaded from file.
+Reconstruction encoder loaded into encoder_da
+✅ LEVIR model loaded.

@@ -1,0 +1,480 @@
+✅ WHU 3-way split loaded.
+Epoch 0
+Train Loss: 0.6839
+Val Loss: 0.5925
+Saved best encoder + decoder!
+Epoch 1
+Train Loss: 0.5836
+Val Loss: 0.5694
+Saved best encoder + decoder!
+Epoch 2
+Train Loss: 0.5741
+Val Loss: 0.5648
+Saved best encoder + decoder!
+Epoch 3
+Train Loss: 0.5696
+Val Loss: 0.5630
+Saved best encoder + decoder!
+Epoch 4
+Train Loss: 0.5649
+Val Loss: 0.5620
+Saved best encoder + decoder!
+Epoch 5
+Train Loss: 0.5629
+Val Loss: 0.5623
+Epoch 6
+Train Loss: 0.5613
+Val Loss: 0.5603
+Saved best encoder + decoder!
+Epoch 7
+Train Loss: 0.5596
+Val Loss: 0.5586
+Saved best encoder + decoder!
+Epoch 8
+Train Loss: 0.5588
+Val Loss: 0.5606
+Epoch 9
+Train Loss: 0.5596
+Val Loss: 0.5584
+Saved best encoder + decoder!
+Epoch 10
+Train Loss: 0.5575
+Val Loss: 0.5601
+Epoch 11
+Train Loss: 0.5568
+Val Loss: 0.5577
+Saved best encoder + decoder!
+Epoch 12
+Train Loss: 0.5571
+Val Loss: 0.5575
+Saved best encoder + decoder!
+Epoch 13
+Train Loss: 0.5561
+Val Loss: 0.5585
+Epoch 14
+Train Loss: 0.5565
+Val Loss: 0.5568
+Saved best encoder + decoder!
+Epoch 15
+Train Loss: 0.5556
+Val Loss: 0.5566
+Saved best encoder + decoder!
+Epoch 16
+Train Loss: 0.5548
+Val Loss: 0.5560
+Saved best encoder + decoder!
+Epoch 17
+Train Loss: 0.5558
+Val Loss: 0.5561
+Epoch 18
+Train Loss: 0.5551
+Val Loss: 0.5567
+Epoch 19
+Train Loss: 0.5544
+Val Loss: 0.5575
+Epoch 20
+Train Loss: 0.5539
+Val Loss: 0.5574
+Epoch 21
+Train Loss: 0.5538
+Val Loss: 0.5555
+Saved best encoder + decoder!
+Epoch 22
+Train Loss: 0.5538
+Val Loss: 0.5554
+Saved best encoder + decoder!
+Epoch 23
+Train Loss: 0.5530
+Val Loss: 0.5552
+Saved best encoder + decoder!
+Epoch 24
+Train Loss: 0.5541
+Val Loss: 0.5581
+Epoch 25
+Train Loss: 0.5541
+Val Loss: 0.5549
+Saved best encoder + decoder!
+Epoch 26
+Train Loss: 0.5528
+Val Loss: 0.5551
+Epoch 27
+Train Loss: 0.5526
+Val Loss: 0.5549
+Epoch 28
+Train Loss: 0.5536
+Val Loss: 0.5545
+Saved best encoder + decoder!
+Epoch 29
+Train Loss: 0.5529
+Val Loss: 0.5549
+Epoch 30
+Train Loss: 0.5530
+Val Loss: 0.5546
+Epoch 31
+Train Loss: 0.5525
+Val Loss: 0.5546
+Epoch 32
+Train Loss: 0.5526
+Val Loss: 0.5544
+Saved best encoder + decoder!
+Epoch 33
+Train Loss: 0.5526
+Val Loss: 0.5551
+Epoch 34
+Train Loss: 0.5522
+Val Loss: 0.5545
+Epoch 35
+Train Loss: 0.5523
+Val Loss: 0.5545
+Epoch 36
+Train Loss: 0.5534
+Val Loss: 0.5548
+Epoch 37
+Train Loss: 0.5518
+Val Loss: 0.5550
+Epoch 38
+Train Loss: 0.5517
+Val Loss: 0.5549
+Epoch 39
+Train Loss: 0.5526
+Val Loss: 0.5559
+Epoch 40
+Train Loss: 0.5516
+Val Loss: 0.5548
+Epoch 41
+Train Loss: 0.5519
+Val Loss: 0.5544
+Saved best encoder + decoder!
+Epoch 42
+Train Loss: 0.5511
+Val Loss: 0.5544
+Epoch 43
+Train Loss: 0.5514
+Val Loss: 0.5543
+Saved best encoder + decoder!
+Epoch 44
+Train Loss: 0.5516
+Val Loss: 0.5540
+Saved best encoder + decoder!
+Epoch 45
+Train Loss: 0.5510
+Val Loss: 0.5542
+Epoch 46
+Train Loss: 0.5512
+Val Loss: 0.5545
+Epoch 47
+Train Loss: 0.5519
+Val Loss: 0.5542
+Epoch 48
+Train Loss: 0.5510
+Val Loss: 0.5546
+Epoch 49
+Train Loss: 0.5513
+Val Loss: 0.5537
+Saved best encoder + decoder!
+Epoch 50
+Train Loss: 0.5511
+Val Loss: 0.5542
+Epoch 51
+Train Loss: 0.5514
+Val Loss: 0.5542
+Epoch 52
+Train Loss: 0.5511
+Val Loss: 0.5543
+Epoch 53
+Train Loss: 0.5515
+Val Loss: 0.5546
+Epoch 54
+Train Loss: 0.5513
+Val Loss: 0.5558
+Epoch 55
+Train Loss: 0.5511
+Val Loss: 0.5539
+Epoch 56
+Train Loss: 0.5511
+Val Loss: 0.5546
+Epoch 57
+Train Loss: 0.5512
+Val Loss: 0.5555
+Epoch 58
+Train Loss: 0.5514
+Val Loss: 0.5542
+Epoch 59
+Train Loss: 0.5505
+Val Loss: 0.5541
+Epoch 60
+Train Loss: 0.5505
+Val Loss: 0.5551
+Epoch 61
+Train Loss: 0.5503
+Val Loss: 0.5539
+Epoch 62
+Train Loss: 0.5507
+Val Loss: 0.5536
+Saved best encoder + decoder!
+Epoch 63
+Train Loss: 0.5503
+Val Loss: 0.5538
+Epoch 64
+Train Loss: 0.5505
+Val Loss: 0.5539
+Epoch 65
+Train Loss: 0.5507
+Val Loss: 0.5539
+Epoch 66
+Train Loss: 0.5505
+Val Loss: 0.5541
+Epoch 67
+Train Loss: 0.5502
+Val Loss: 0.5537
+Epoch 68
+Train Loss: 0.5510
+Val Loss: 0.5538
+Epoch 69
+Train Loss: 0.5507
+Val Loss: 0.5545
+Epoch 70
+Train Loss: 0.5503
+Val Loss: 0.5542
+Epoch 71
+Train Loss: 0.5499
+Val Loss: 0.5539
+Epoch 72
+Train Loss: 0.5504
+Val Loss: 0.5548
+Epoch 73
+Train Loss: 0.5498
+Val Loss: 0.5539
+Epoch 74
+Train Loss: 0.5499
+Val Loss: 0.5546
+Epoch 75
+Train Loss: 0.5502
+Val Loss: 0.5540
+Epoch 76
+Train Loss: 0.5498
+Val Loss: 0.5539
+Epoch 77
+Train Loss: 0.5503
+Val Loss: 0.5539
+Epoch 78
+Train Loss: 0.5498
+Val Loss: 0.5540
+Epoch 79
+Train Loss: 0.5506
+Val Loss: 0.5537
+Epoch 80
+Train Loss: 0.5500
+Val Loss: 0.5536
+Saved best encoder + decoder!
+Epoch 81
+Train Loss: 0.5504
+Val Loss: 0.5541
+Epoch 82
+Train Loss: 0.5498
+Val Loss: 0.5539
+Epoch 83
+Train Loss: 0.5504
+Val Loss: 0.5542
+Epoch 84
+Train Loss: 0.5499
+Val Loss: 0.5537
+Epoch 85
+Train Loss: 0.5505
+Val Loss: 0.5540
+Epoch 86
+Train Loss: 0.5502
+Val Loss: 0.5552
+Epoch 87
+Train Loss: 0.5498
+Val Loss: 0.5538
+Epoch 88
+Train Loss: 0.5500
+Val Loss: 0.5541
+Epoch 89
+Train Loss: 0.5496
+Val Loss: 0.5535
+Saved best encoder + decoder!
+Epoch 90
+Train Loss: 0.5495
+Val Loss: 0.5541
+Epoch 91
+Train Loss: 0.5503
+Val Loss: 0.5539
+Epoch 92
+Train Loss: 0.5501
+Val Loss: 0.5543
+Epoch 93
+Train Loss: 0.5500
+Val Loss: 0.5539
+Epoch 94
+Train Loss: 0.5498
+Val Loss: 0.5541
+Epoch 95
+Train Loss: 0.5498
+Val Loss: 0.5539
+Epoch 96
+Train Loss: 0.5494
+Val Loss: 0.5541
+Epoch 97
+Train Loss: 0.5498
+Val Loss: 0.5540
+Epoch 98
+Train Loss: 0.5497
+Val Loss: 0.5548
+Epoch 99
+Train Loss: 0.5498
+Val Loss: 0.5543
+Epoch 100
+Train Loss: 0.5496
+Val Loss: 0.5557
+Epoch 101
+Train Loss: 0.5500
+Val Loss: 0.5538
+Epoch 102
+Train Loss: 0.5510
+Val Loss: 0.5538
+Epoch 103
+Train Loss: 0.5501
+Val Loss: 0.5539
+Epoch 104
+Train Loss: 0.5497
+Val Loss: 0.5537
+Epoch 105
+Train Loss: 0.5495
+Val Loss: 0.5536
+Epoch 106
+Train Loss: 0.5497
+Val Loss: 0.5538
+Epoch 107
+Train Loss: 0.5493
+Val Loss: 0.5542
+Epoch 108
+Train Loss: 0.5514
+Val Loss: 0.5540
+Epoch 109
+Train Loss: 0.5504
+Val Loss: 0.5554
+Epoch 110
+Train Loss: 0.5500
+Val Loss: 0.5535
+Epoch 111
+Train Loss: 0.5495
+Val Loss: 0.5540
+Epoch 112
+Train Loss: 0.5492
+Val Loss: 0.5540
+Epoch 113
+Train Loss: 0.5502
+Val Loss: 0.5537
+Epoch 114
+Train Loss: 0.5500
+Val Loss: 0.5541
+Epoch 115
+Train Loss: 0.5496
+Val Loss: 0.5538
+Epoch 116
+Train Loss: 0.5492
+Val Loss: 0.5535
+Saved best encoder + decoder!
+Epoch 117
+Train Loss: 0.5497
+Val Loss: 0.5535
+Saved best encoder + decoder!
+Epoch 118
+Train Loss: 0.5494
+Val Loss: 0.5539
+Epoch 119
+Train Loss: 0.5500
+Val Loss: 0.5536
+Epoch 120
+Train Loss: 0.5496
+Val Loss: 0.5540
+Epoch 121
+Train Loss: 0.5492
+Val Loss: 0.5535
+Epoch 122
+Train Loss: 0.5497
+Val Loss: 0.5539
+Epoch 123
+Train Loss: 0.5490
+Val Loss: 0.5540
+Epoch 124
+Train Loss: 0.5494
+Val Loss: 0.5536
+Epoch 125
+Train Loss: 0.5491
+Val Loss: 0.5536
+Epoch 126
+Train Loss: 0.5501
+Val Loss: 0.5535
+Epoch 127
+Train Loss: 0.5491
+Val Loss: 0.5537
+Epoch 128
+Train Loss: 0.5498
+Val Loss: 0.5538
+Epoch 129
+Train Loss: 0.5491
+Val Loss: 0.5536
+Epoch 130
+Train Loss: 0.5494
+Val Loss: 0.5534
+Saved best encoder + decoder!
+Epoch 131
+Train Loss: 0.5490
+Val Loss: 0.5536
+Epoch 132
+Train Loss: 0.5498
+Val Loss: 0.5537
+Epoch 133
+Train Loss: 0.5489
+Val Loss: 0.5541
+Epoch 134
+Train Loss: 0.5496
+Val Loss: 0.5540
+Epoch 135
+Train Loss: 0.5493
+Val Loss: 0.5537
+Epoch 136
+Train Loss: 0.5488
+Val Loss: 0.5537
+Epoch 137
+Train Loss: 0.5496
+Val Loss: 0.5537
+Epoch 138
+Train Loss: 0.5494
+Val Loss: 0.5537
+Epoch 139
+Train Loss: 0.5499
+Val Loss: 0.5542
+Epoch 140
+Train Loss: 0.5501
+Val Loss: 0.5535
+Epoch 141
+Train Loss: 0.5496
+Val Loss: 0.5539
+Epoch 142
+Train Loss: 0.5497
+Val Loss: 0.5538
+Epoch 143
+Train Loss: 0.5496
+Val Loss: 0.5537
+Epoch 144
+Train Loss: 0.5494
+Val Loss: 0.5535
+Epoch 145
+Train Loss: 0.5490
+Val Loss: 0.5539
+Epoch 146
+Train Loss: 0.5494
+Val Loss: 0.5539
+Epoch 147
+Train Loss: 0.5500
+Val Loss: 0.5536
+Epoch 148
+Train Loss: 0.5498
+Val Loss: 0.5535
+Epoch 149
+Train Loss: 0.5492
+Val Loss: 0.5534
