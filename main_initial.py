@@ -126,7 +126,7 @@ train_loader = DataLoader(
     train_set,
     batch_size=8,
     shuffle=True,
-    num_workers=4,
+    num_workers=8,
     drop_last=True,
     pin_memory=True
 )
@@ -135,7 +135,7 @@ val_loader = DataLoader(
     val_set,
     batch_size=8,
     shuffle=False,
-    num_workers=4,
+    num_workers=8,
     pin_memory=True
 
 )
@@ -145,7 +145,7 @@ whu_train_loader = DataLoader(
     train_ds,
     batch_size=8,
     shuffle=True,
-    num_workers=4,
+    num_workers=8,
     pin_memory=True
 )
 
@@ -153,7 +153,7 @@ whu_val_loader = DataLoader(
     val_ds,
     batch_size=8,
     shuffle=False,
-    num_workers=4,
+    num_workers=8,
     pin_memory=True
 )
 
@@ -161,7 +161,7 @@ whu_test_loader = DataLoader(
     test_ds,
     batch_size=8,
     shuffle=False,
-    num_workers=4,
+    num_workers=8,
     pin_memory=True
 )
 
@@ -187,10 +187,10 @@ strong_transform = T.Compose([
 
 
 encoder = ResNetSiameseEncoder(pretrained=True).to(device)
-decoder = SimpleDecoder(channels=[256, 512, 1024, 2048]).to(device)
+decoder = SimpleDecoder().to(device)
 discriminator = DomainDiscriminator(in_dim=2048).to(device)
 
-ckpt = torch.load("../checkpoints/initial_model.pth", map_location="cpu")
+ckpt = torch.load("checkpoints/initial_model.pth", map_location="cpu")
 
 encoder.load_state_dict(ckpt["encoder"])
 
@@ -226,10 +226,12 @@ def validate(encoder, decoder, val_loader, metrics):
             f = encoder(xa, xb, mode="change")
             
             pred = decoder(
+                f["stem"],
                 f["l1"],
                 f["l2"],
                 f["l3"],
-                f["l4"]
+                f["l4"],
+                task = "cd"
             )
 
             pred = F.interpolate(
@@ -312,7 +314,7 @@ for epoch in range(epochs):
         xa_t, xb_t = xa_t.to(device), xb_t.to(device)
         # Supervised Loss (LEVIR) 
         f_s = encoder(xa_s, xb_s, mode="change")
-        pred_s = decoder(f_s["l1"],f_s["l2"],f_s["l3"],f_s["l4"])
+        pred_s = decoder(f_s["stem"],f_s["l1"],f_s["l2"],f_s["l3"],f_s["l4"], task="cd")
 
 
         y_s = y_s.squeeze(1)
@@ -351,10 +353,12 @@ for epoch in range(epochs):
 
         
         pred_t_w = decoder(
+            f_t_w["stem"],
             f_t_w["l1"],
             f_t_w["l2"],
             f_t_w["l3"],
-            f_t_w["l4"]
+            f_t_w["l4"],
+            task="cd"
         )
         
         pred_t_w = F.interpolate(
@@ -368,7 +372,7 @@ for epoch in range(epochs):
         prob = torch.softmax(pred_t_w.detach(), dim=1)
         max_prob, pseudo_label = torch.max(prob, dim=1)
         
-        threshold = 0.95 + 0.04 * (1 - curr_iter / total_iters)        
+        threshold = 0.93
         mask = (max_prob > threshold)     
         
         epoch_mask_sum += mask.sum().item()
@@ -378,10 +382,12 @@ for epoch in range(epochs):
         f_t_s = encoder(xa_t_s, xb_t_s, mode="change")
         
         pred_t_s = decoder(
+            f_t_s["stem"],
             f_t_s["l1"],
             f_t_s["l2"],
             f_t_s["l3"],
-            f_t_s["l4"]
+            f_t_s["l4"],
+            task="cd"
         )
         
         pred_t_s = F.interpolate(
@@ -494,7 +500,7 @@ for epoch in range(epochs):
             'discriminator': discriminator.state_dict(),
             'epoch': epoch,
             'val_metrics': val_metrics
-        }, '../checkpoints/best_seperate_awda_resnet_whu.pth')
+        }, '../checkpoints/no_reconstruction.pth')
 
         print(f"✅ New best model saved (Epoch {epoch}, F1={best_f1:.2f})")
 

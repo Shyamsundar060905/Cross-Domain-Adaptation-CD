@@ -1,0 +1,6 @@
+
+🚀 Running Final Test Evaluation...
+Loaded best model from epoch 44
+Best validation F1: 85.8929
+
+🔥 Final Test Metrics: {'Precision': 87.6053512096405, 'Recall': 84.67145562171936, 'F1': 86.11341714859009, 'IoU': 75.61331391334534}

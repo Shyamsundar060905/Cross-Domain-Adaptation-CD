@@ -78,10 +78,12 @@ def evaluate_whu_with_gt(
 
             feats = encoder(xa, xb, mode="change")
             logits = decoder(
+                feats["stem"],
                 feats["l1"],
                 feats["l2"],
                 feats["l3"],
-                feats["l4"]
+                feats["l4"],
+                task="cd"
             )
             logits = torch.nn.functional.interpolate(
                 logits,
@@ -128,5 +130,5 @@ def evaluate_whu_with_gt(
 
 if __name__ == "__main__":
     evaluate_whu_with_gt(
-        model_path="../checkpoints/best_seperate_awda_resnet_whu.pth",
+        model_path="../checkpoints/awda_resnet.pth",
     )

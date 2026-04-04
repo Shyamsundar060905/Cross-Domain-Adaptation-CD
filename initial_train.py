@@ -3,14 +3,13 @@ import torch.nn.functional as F
 from torch.utils.data import DataLoader, random_split
 import torchvision
 import os
-
+from tqdm import tqdm
 from models.clip_encoder import ResNetSiameseEncoder
 from models.decoder import SimpleDecoder
 from utils.metrics import CDMetrics
 from data.levir_dataset import LEVIRCDDataset
 
-os.makedirs("checkpoints", exist_ok=True)
-device = "cuda"
+device = "cuda:7"
 
 dataset = LEVIRCDDataset(root_dir="datasets/LEVIR-CD256")
 
@@ -29,14 +28,14 @@ train_set, val_set, test_set = random_split(
     [train_size, val_size, test_size],
     generator=torch.Generator().manual_seed(42)
 )
-train_loader = DataLoader(train_set, batch_size=8, shuffle=True, num_workers=2)
-val_loader   = DataLoader(val_set, batch_size=8, shuffle=False, num_workers=2)
-test_loader = DataLoader(test_set,batch_size = 8,shuffle=False,num_workers=2)
+train_loader = DataLoader(train_set, batch_size=16, shuffle=True, num_workers=8)
+val_loader   = DataLoader(val_set, batch_size=16, shuffle=False, num_workers=8)
+test_loader = DataLoader(test_set,batch_size = 16,shuffle=False,num_workers=8)
 # ------------------------------
 # Model
 # ------------------------------
 encoder = ResNetSiameseEncoder(pretrained=True).to(device)
-decoder = SimpleDecoder(channels=[256, 512, 1024, 2048]).to(device)
+decoder = SimpleDecoder().to(device)
 
 optimizer = torch.optim.SGD(
     list(encoder.parameters()) + list(decoder.parameters()),
@@ -65,11 +64,16 @@ def dice_loss(logits, targets, eps=1e-5):
             mode="nearest"
         ).squeeze(1)
 
-    intersection = (probs * targets).sum()
-    union = probs.sum() + targets.sum()
+    probs = probs.contiguous().view(probs.size(0), -1)
+    targets = targets.contiguous().view(targets.size(0), -1)
 
-    return 1 - (2 * intersection + eps) / (union + eps)
+    intersection = (probs * targets).sum(dim=1)
+    union = probs.sum(dim=1) + targets.sum(dim=1)
 
+    dice = (2 * intersection + eps) / (union + eps)
+    return 1 - dice.mean()
+
+    
 # ------------------------------
 # Validation
 # ------------------------------
@@ -83,12 +87,14 @@ def validate():
         xa, xb, y = xa.to(device), xb.to(device), y.to(device)
         y = (y > 0).long().squeeze(1)
 
-        feats = encoder(xa, xb)
+        feats = encoder(xa, xb, mode="change")
         pred = decoder(
+            feats["stem"],
             feats["l1"],
             feats["l2"],
             feats["l3"],
-            feats["l4"]
+            feats["l4"],
+            task="cd"
         )
 
         metrics.update(pred, y)
@@ -105,68 +111,76 @@ best_f1 = 0.0
 patience = 15
 patience_counter = 0
 
-for epoch in range(epochs):
-    metrics.reset()
+# for epoch in range(epochs):
+#     metrics.reset()
+#     epoch_loss = 0.0
 
-    for xa, xb, y in train_loader:
-        xa, xb, y = xa.to(device), xb.to(device), y.to(device)
-        y = (y > 0).long().squeeze(1)
+#     pbar = tqdm(train_loader, desc=f"Epoch {epoch+1}/{epochs}")
 
-        feats = encoder(xa, xb)
-        pred = decoder(
-            feats["l1"],
-            feats["l2"],
-            feats["l3"],
-            feats["l4"]
-        )
+#     for xa, xb, y in pbar:
+#         xa, xb, y = xa.to(device), xb.to(device), y.to(device)
+#         y = (y > 0).long().squeeze(1)
 
-        loss = F.cross_entropy(pred, y) + 0.8 * dice_loss(pred, y)
+#         feats = encoder(xa, xb, mode="change")
+#         pred = decoder(
+#             feats["stem"],
+#             feats["l1"],
+#             feats["l2"],
+#             feats["l3"],
+#             feats["l4"],
+#             task="cd"
+#         )
 
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
+#         loss = F.cross_entropy(pred, y) + 0.8 * dice_loss(pred, y)
 
-        metrics.update(pred, y)
+#         optimizer.zero_grad()
+#         loss.backward()
+#         optimizer.step()
 
-    scheduler.step()
+#         metrics.update(pred, y)
+#         epoch_loss += loss.item()
 
-    train_metrics = metrics.compute()
-    val_metrics = validate()
+#         # update progress bar
+#         pbar.set_postfix({
+#             "loss": epoch_loss / (pbar.n + 1),
+#         })
 
-    print(f"Epoch {epoch+1}")
-    print("Train:", train_metrics)
-    print("Val:", val_metrics)
+#     scheduler.step()
 
-    if val_metrics["F1"] > best_f1:
-        best_f1 = val_metrics["F1"]
-        patience_counter = 0
+#     train_metrics = metrics.compute()
+#     val_metrics = validate()
 
-        torch.save(
-            {
-                "encoder": encoder.state_dict(),
-                "decoder": decoder.state_dict(),
-                "epoch": epoch,
-                "val_f1": best_f1,
-            },
-            "checkpoints/initial_model.pth"
-        )
-        print("✅ Saved initial_model.pth")
+#     print(f"\nEpoch {epoch+1}")
+#     print("Train:", train_metrics)
+#     print("Val:", val_metrics)
 
-    else:
-        patience_counter += 1
+#     if val_metrics["F1"] > best_f1:
+#         best_f1 = val_metrics["F1"]
+#         patience_counter = 0
 
-    if patience_counter >= patience:
-        print("🛑 Early stopping")
-        break
+#         torch.save(
+#             {
+#                 "encoder": encoder.state_dict(),
+#                 "decoder": decoder.state_dict(),
+#                 "epoch": epoch,
+#                 "val_f1": best_f1,
+#             },
+#             "checkpoints/initial_model.pth"
+#         )
+#         print("✅ Saved initial_model.pth")
 
+#     else:
+#         patience_counter += 1
 
-# ------------------------------
+#     if patience_counter >= patience:
+#         print("🛑 Early stopping")
+#         break# ------------------------------
 # Final Test Evaluation
 # ------------------------------
 @torch.no_grad()
 def test():
     print("\n🚀 Running Final Test Evaluation...")
-
+    
     checkpoint = torch.load("checkpoints/initial_model.pth", map_location=device)
     encoder.load_state_dict(checkpoint["encoder"])
     decoder.load_state_dict(checkpoint["decoder"])
@@ -182,12 +196,14 @@ def test():
         xa, xb, y = xa.to(device), xb.to(device), y.to(device)
         y = (y > 0).long().squeeze(1)
 
-        feats = encoder(xa, xb)
+        feats = encoder(xa, xb,mode="change")
         pred = decoder(
+            feats["stem"],
             feats["l1"],
             feats["l2"],
             feats["l3"],
-            feats["l4"]
+            feats["l4"],
+            task="cd"
         )
 
         metrics.update(pred, y)

@@ -100,7 +100,6 @@ def train_reconstruction(encoder, decoder, loader, optimizer, device):
             features["l2_a"],
             features["l3_a"],
             features["l4_a"],
-            out_size=xa.shape[2:],
             task="recon"   # IMPORTANT
         )
         
@@ -110,7 +109,6 @@ def train_reconstruction(encoder, decoder, loader, optimizer, device):
             features["l2_b"],
             features["l3_b"],
             features["l4_b"],
-            out_size=xb.shape[2:],
             task="recon"   # IMPORTANT
         )
 
@@ -149,7 +147,6 @@ def validate_reconstruction(encoder, decoder, loader, device):
                 features["l2_a"],
                 features["l3_a"],
                 features["l4_a"],
-                out_size=xa.shape[2:],
                 task="recon"
             )
 
@@ -159,7 +156,6 @@ def validate_reconstruction(encoder, decoder, loader, device):
                 features["l2_b"],
                 features["l3_b"],
                 features["l4_b"],
-                out_size=xb.shape[2:],
                 task="recon"
             )
 
@@ -175,7 +171,7 @@ def validate_reconstruction(encoder, decoder, loader, device):
 
     
 optimizer = torch.optim.Adam([
-    {"params": encoder.parameters(), "lr": 1e-5},
+    {"params": encoder.parameters(), "lr": 1e-4},
     {"params": decoder.parameters(), "lr": 1e-4},
 ])
 
@@ -183,13 +179,24 @@ optimizer = torch.optim.Adam([
 num_epochs = 150
 best_val_loss = float("inf")
 
+
+scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+    optimizer,
+    T_max=num_epochs,
+    eta_min=1e-6
+)
+
+
 for epoch in range(num_epochs):
     train_loss = train_reconstruction(encoder, decoder, whu_train_loader, optimizer, device)
     val_loss = validate_reconstruction(encoder, decoder, whu_val_loader, device)
+    scheduler.step()  
+    current_lr = optimizer.param_groups[0]['lr']
 
     print(f"Epoch {epoch}")
     print(f"Train Loss: {train_loss:.4f}")
     print(f"Val Loss: {val_loss:.4f}")
+    print(f"LR: {current_lr:.6f}")
 
     if val_loss < best_val_loss:
         best_val_loss = val_loss

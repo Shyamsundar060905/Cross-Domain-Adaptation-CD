@@ -1,0 +1,46 @@
+Using device: cuda:3
+✅ WHU 3-way split loaded.
+✅ LEVIR split loaded from file.
+✅ LEVIR model loaded.
+Epoch 0 Discriminator Accuracy: 55.17%
+Epoch 0 LEVIR-Train Metrics: {'Precision': 84.9622368812561, 'Recall': 78.75328063964844, 'F1': 81.74001574516296, 'IoU': 69.11892294883728}
+Avg Pseudo-label ratio: 0.8922493249386954
+Epoch 0 Avg Loss | Sup: 0.1451 | Unsup: nan | DMN: 1.3742
+[VAL] Epoch 0 WHU-Val Metrics: {'Precision': 58.06540250778198, 'Recall': 48.145464062690735, 'F1': 52.642178535461426, 'IoU': 35.72404682636261, 'Loss': 0.2020507864441262}
+✅ New best model saved (Epoch 0, F1=52.64)
+Epoch 1 Discriminator Accuracy: 51.40%
+Epoch 1 LEVIR-Train Metrics: {'Precision': 90.27007222175598, 'Recall': 87.31275796890259, 'F1': 88.76679539680481, 'IoU': 79.80242371559143}
+Avg Pseudo-label ratio: 0.9579917672658117
+Epoch 1 Avg Loss | Sup: 0.0807 | Unsup: 0.0000 | DMN: 1.3861
+[VAL] Epoch 1 WHU-Val Metrics: {'Precision': 27.60511338710785, 'Recall': 20.015718042850494, 'F1': 23.205649852752686, 'IoU': 13.125786185264587, 'Loss': 0.9929171043938847}
+⏳ No improvement for 1/10
+Epoch 2 Discriminator Accuracy: 50.71%
+Epoch 2 LEVIR-Train Metrics: {'Precision': 90.90088605880737, 'Recall': 88.48156332969666, 'F1': 89.67490792274475, 'IoU': 81.28242492675781}
+Avg Pseudo-label ratio: 0.9612421680464858
+Epoch 2 Avg Loss | Sup: 0.0741 | Unsup: 0.0000 | DMN: 1.3871
+[VAL] Epoch 2 WHU-Val Metrics: {'Precision': 54.65773344039917, 'Recall': 26.26456618309021, 'F1': 35.48000156879425, 'IoU': 21.565768122673035, 'Loss': 0.3100733948040313}
+⏳ No improvement for 2/10
+Epoch 3 Discriminator Accuracy: 51.14%
+Epoch 3 LEVIR-Train Metrics: {'Precision': 91.7358934879303, 'Recall': 89.53686952590942, 'F1': 90.62304496765137, 'IoU': 82.85386562347412}
+Avg Pseudo-label ratio: 0.9627417808206307
+Epoch 3 Avg Loss | Sup: 0.0688 | Unsup: 0.0130 | DMN: 1.3863
+[VAL] Epoch 3 WHU-Val Metrics: {'Precision': 84.38429236412048, 'Recall': 10.661903768777847, 'F1': 18.931788206100464, 'IoU': 10.45561134815216, 'Loss': 0.5357457464216627}
+⏳ No improvement for 3/10
+Epoch 4 Discriminator Accuracy: 51.36%
+Epoch 4 LEVIR-Train Metrics: {'Precision': 91.90341234207153, 'Recall': 90.22991061210632, 'F1': 91.05896949768066, 'IoU': 83.58556032180786}
+Avg Pseudo-label ratio: 0.9536364464617015
+Epoch 4 Avg Loss | Sup: 0.0636 | Unsup: 0.0139 | DMN: 1.3857
+[VAL] Epoch 4 WHU-Val Metrics: {'Precision': 86.2119197845459, 'Recall': 24.87846165895462, 'F1': 38.61396312713623, 'IoU': 23.92645925283432, 'Loss': 0.13707547640285245}
+⏳ No improvement for 4/10
+Epoch 5 Discriminator Accuracy: 51.81%
+Epoch 5 LEVIR-Train Metrics: {'Precision': 92.25178956985474, 'Recall': 90.82897901535034, 'F1': 91.53485894203186, 'IoU': 84.39103960990906}
+Avg Pseudo-label ratio: 0.9573558761688813
+Epoch 5 Avg Loss | Sup: 0.0601 | Unsup: 0.0133 | DMN: 1.3852
+[VAL] Epoch 5 WHU-Val Metrics: {'Precision': 80.91665506362915, 'Recall': 20.53242027759552, 'F1': 32.75367021560669, 'IoU': 19.584088027477264, 'Loss': 0.14496450245246462}
+⏳ No improvement for 5/10
+Epoch 6 Discriminator Accuracy: 51.62%
+Epoch 6 LEVIR-Train Metrics: {'Precision': 92.40888953208923, 'Recall': 90.83184599876404, 'F1': 91.61357283592224, 'IoU': 84.5249593257904}
+Avg Pseudo-label ratio: 0.9555099804010194
+Epoch 6 Avg Loss | Sup: 0.0584 | Unsup: 0.0125 | DMN: 1.3856
+[VAL] Epoch 6 WHU-Val Metrics: {'Precision': 82.45612382888794, 'Recall': 5.29075562953949, 'F1': 9.943491965532303, 'IoU': 5.231860652565956, 'Loss': 0.26607319097390136}
+⏳ No improvement for 6/10

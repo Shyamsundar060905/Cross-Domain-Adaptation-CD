@@ -20,7 +20,7 @@ class AWDA_Manager:
         return 1.0 / (self.p_glb ** exponent)
 
     def get_cwst_loss(self, pred_t, pseudo_label, weights, curr_iter, total_iter):
-        threshold = 0.88
+        threshold = 0.93
 
         
         prob_t = F.softmax(pred_t, dim=1)

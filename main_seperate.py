@@ -23,7 +23,7 @@ from data.whu_dataset import WHUDataset
 from utils.focal_loss import FocalLoss
 
 
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
+device = torch.device("cuda:7" if torch.cuda.is_available() else "cpu")
 print(f"Using device: {device}")
 
 os.makedirs('checkpoints', exist_ok=True)
@@ -126,18 +126,18 @@ else:
 
 train_loader = DataLoader(
     train_set,
-    batch_size=16,
+    batch_size=8,
     shuffle=True,
-    num_workers=8,
+    num_workers=4,
     drop_last=True,
     pin_memory=True
 )
 
 val_loader = DataLoader(
     val_set,
-    batch_size=16,
+    batch_size=8,
     shuffle=False,
-    num_workers=8,
+    num_workers=4,
     pin_memory=True
 
 )
@@ -145,25 +145,25 @@ val_loader = DataLoader(
     
 whu_train_loader = DataLoader(
     train_ds,
-    batch_size=16,
+    batch_size=8,
     shuffle=True,
-    num_workers=8,
+    num_workers=4,
     pin_memory=True
 )
 
 whu_val_loader = DataLoader(
     val_ds,
-    batch_size=16,
+    batch_size=8,
     shuffle=False,
-    num_workers=8,
+    num_workers=4,
     pin_memory=True
 )
 
 whu_test_loader = DataLoader(
     test_ds,
-    batch_size=16,
+    batch_size=8,
     shuffle=False,
-    num_workers=8,
+    num_workers=4,
     pin_memory=True
 )
 
@@ -187,7 +187,7 @@ strong_transform = T.Compose([
     ),
 ])
 
-focal = FocalLoss(alpha=0.75, gamma=2.0)
+focal = FocalLoss(alpha=0.85, gamma=2.0)
 
 
 decoder = SimpleDecoder().to(device)
@@ -209,7 +209,7 @@ decoder.load_state_dict(decoder_weights, strict=False)
 print("Reconstruction encoder loaded into encoder_da")
 
 
-ckpt = torch.load("../checkpoints/best_seperate_awda_resnet_whu.pth", map_location="cpu")
+ckpt = torch.load("checkpoints/initial_model.pth", map_location="cpu")
 
 encoder_cd.load_state_dict(ckpt["encoder"])
 
@@ -247,7 +247,7 @@ def validate(encoder, decoder, val_loader, metrics):
 
             # Forward
             f = encoder(xa, xb, mode="change")
-            pred = decoder(f["stem"],f["l1"], f["l2"], f["l3"], f["l4"],out_size=xa.shape[2:],task="cd")
+            pred = decoder(f["stem"],f["l1"], f["l2"], f["l3"], f["l4"],task="cd")
 
             pred = F.interpolate(
                 pred,
@@ -336,7 +336,7 @@ for epoch in range(epochs):
         # 1. SUPERVISED LOSS (SOURCE)
         # =========================================================
         f_s = encoder_cd(xa_s, xb_s, mode="change")
-        pred_s = decoder(f_s["stem"],f_s["l1"], f_s["l2"], f_s["l3"], f_s["l4"],out_size=xa_s.shape[2:],task="cd")
+        pred_s = decoder(f_s["stem"],f_s["l1"], f_s["l2"], f_s["l3"], f_s["l4"],task="cd")
 
         pred_s = F.interpolate(pred_s, size=y_s.shape[-2:], mode='bilinear', align_corners=False)
 
@@ -354,13 +354,13 @@ for epoch in range(epochs):
         f_t_w = encoder_cd(xa_t_w, xb_t_w, mode="change")
 
 
-        pred_t_w = decoder(f_t_w["stem"],f_t_w["l1"], f_t_w["l2"], f_t_w["l3"], f_t_w["l4"],out_size=xa_s.shape[2:],task="cd")
+        pred_t_w = decoder(f_t_w["stem"],f_t_w["l1"], f_t_w["l2"], f_t_w["l3"], f_t_w["l4"],task="cd")
         pred_t_w = F.interpolate(pred_t_w, size=xa_t.shape[-2:], mode='bilinear', align_corners=False)
 
         prob = torch.softmax(pred_t_w.detach(), dim=1)
         max_prob, pseudo_label = torch.max(prob, dim=1)
 
-        threshold = 0.88
+        threshold = 0.95
         mask = (max_prob > threshold)
         epoch_mask_sum += mask.sum().item()
         epoch_total += mask.numel()
@@ -370,7 +370,7 @@ for epoch in range(epochs):
         xa_t_s, xb_t_s = apply_augmentation(xa_t, xb_t, strong_transform)
 
         f_t_s = encoder_da(xa_t_s, xb_t_s, mode="change")
-        pred_t_s = decoder(f_t_s["stem"],f_t_s["l1"], f_t_s["l2"], f_t_s["l3"], f_t_s["l4"],out_size=xa_t_s.shape[2:])
+        pred_t_s = decoder(f_t_s["stem"],f_t_s["l1"], f_t_s["l2"], f_t_s["l3"], f_t_s["l4"], task="cd")
         pred_t_s = F.interpolate(pred_t_s, size=xa_t.shape[-2:], mode='bilinear', align_corners=False)
 
         weights = awda.update_weights(pred_s, y_s, curr_iter, total_iters)
